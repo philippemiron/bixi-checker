@@ -1,13 +1,13 @@
-import urllib
+import urllib.request
 import re
 import json
 
 
 def get_stations(city):
     url = 'https://%s.bixi.com/maps/statajax' % city
-    response = urllib.urlopen(url)
-    content = ''.join(response.readlines())
-
+    with urllib.request.urlopen(url) as request:
+      content = request.read().decode('utf-8')
+      
     # Go through the Javascript, looking for `var station`s
     # Best API ever
     matches = re.findall('var station = [^;]+;', content)

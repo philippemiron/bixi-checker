@@ -3,7 +3,7 @@ Bixi Checker
 
 A simple command-line script that I created to simplify checking the status of your favourite bixi stations. It can handle multiple stations per location, routes (start and end locations only), and custom names for stations.
 
-Requires Python 2.7+.
+Requires Python 3.0+.
 
 Simple example
 --------------
