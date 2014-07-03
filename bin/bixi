@@ -23,25 +23,32 @@ def print_route_info(stations, start_location, end_location):
   print(get_location_info(stations, end_location, 'docks'))
 
 def get_location_info(stations, location, looking_for):
-    for station_id in conf.locations[location]:
-        station = stations[station_id]
-        # Either the number of bikes or number of docks
-        num_things = station[looking_for]
+  found = False
+  for station_id in conf.locations[location]:
+    station = stations[station_id]
+    # Either the number of bikes or number of docks
+    num_things = station[looking_for]
 
-        if num_things > 0:
-            try:
-                station_name = conf.stations[station_id]
-            except KeyError:
-                station_name = station['name']
+    if num_things > 0:
+      if not found:
+        print("%s @ %s:" % (looking_for, location))
+        found = True
 
-            return "%s: %d %s" % (station_name, num_things, looking_for)
+      try:
+          station_name = conf.stations[station_id]
+      except KeyError:
+          station_name = station['name']
+       
+      # continue looking for bikes/docks in other stations
+      # if the number of things is smaller than the settings
+      if num_things < conf.min_things:
+        print("\t%s: \t%d %s" % (station_name, num_things, looking_for))
+      else:
+        return "\t%s: \t%d %s\n" % (station_name, num_things, looking_for)
 
-        # Nothing has been found
-        return "No stations with %s found near %s! Add a new station?" % (
-            looking_for,
-            location,
-        )
-
+  # Nothing has been found
+  if not found:
+     return "No station with %s found near %s! Add a new station?\n" % (looking_for, location)
 
 if args.mode in modes:
     stations = scraper.get_stations(conf.city)

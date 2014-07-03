@@ -5,6 +5,9 @@ Edit this file and copy it over to conf.py.
 # Possibilities: capitale (for Ottawa/Gatineau), toronto, montreal
 city = 'montreal'
 
+# number of minimum bikes/docks at station
+min_things = 3
+
 # Add all the stations you want to give a custom name to here
 stations = {
     1: 'Right outside house',
