@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import argparse
-
 from bixiapi import scraper, conf
-
 
 modes = ['search', 'route', 'go']
 
@@ -16,7 +14,6 @@ parser.add_argument('arguments',
                     nargs='+')
 
 args = parser.parse_args()
-
 
 def print_route_info(stations, start_location, end_location):
   print(get_location_info(stations, start_location, 'bikes'))
@@ -56,8 +53,8 @@ if args.mode in modes:
     if args.mode == 'search':
         query = args.arguments[0].lower()
         for station_id, station in stations.items():
-            if query in station['name'].lower():
-              print( "%s: %s (%d bikes / %d docks)" % (station_id, station['name'], station['bikes'], station['docks']) )
+          if query in station['name'].lower():
+            print( "%s: %s (%d bikes / %d docks)" % (station_id, station['name'], station['bikes'], station['docks']) )
 
     if args.mode == 'route':
         route = args.arguments[0]
