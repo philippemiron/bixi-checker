@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import argparse
-from bixiapi import scraper, conf
+import scraper, conf
 
 modes = ['search', 'route', 'go']
 
